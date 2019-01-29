@@ -1,0 +1,235 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Настройки системы')
+
+@push('css')
+
+  <link href="{{ asset('css/admin/settings.css') }}" rel="stylesheet" type="text/css">
+
+@endpush
+
+@push('scripts')
+
+  <script src="{{ asset('js/admin/settings.js') }}"></script>
+
+  <script src="{{ asset('js/admin/plugins/jquery.bootstrap-touchspin.min.js') }}"></script>
+  <script src="{{ asset('js/admin/init/form-touchspin-init.js') }}"></script>
+
+  <script src="{{ asset('js/admin/plugins/switchery.min.js') }}"></script>
+  <script src="{{ asset('js/admin/init/switchery-init.js') }}"></script>
+
+@endpush
+
+@section('content')
+  <div class="row">
+
+    <!-- Start XP Col -->
+    <div class="col-lg-12">
+      <div class="card m-b-30">
+        <div class="card-header bg-white">
+          <h5 class="card-title text-black">Все настройки системы CoopCMS</h5>
+        </div>
+        {!! Form::open(['route' => 'admin.settings.store']) !!}
+
+        <div class="card-body">
+
+          @include('admin.layouts.bodyerrors')
+
+          <ul class="nav nav-tabs nav-justified mb-3" id="defaultTabJustified" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active show" id="home-tab-justified" data-toggle="tab" href="#main-justified" role="tab" aria-controls="main" aria-selected="true">Общие настройки</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="bank-tab-justified" data-toggle="tab" href="#bank-justified" role="tab" aria-controls="bank" aria-selected="false">Банковские реквизиты</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="finace-tab-justified" data-toggle="tab" href="#finance-justified" role="tab" aria-controls="finance" aria-selected="false">Движение финансов</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="flow-tab-justified" data-toggle="tab" href="#flow-justified" role="tab" aria-controls="flow" aria-selected="false">Очередь</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pay-tab-justified" data-toggle="tab" href="#pay-justified" role="tab" aria-controls="pay" aria-selected="false">Пайщики</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="notif-tab-justified" data-toggle="tab" href="#notif-justified" role="tab" aria-controls="notif" aria-selected="false">Уведомления</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="defaultTabJustifiedContent">
+
+            <div class="tab-pane fade active show" id="main-justified" role="tabpanel" aria-labelledby="home-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Название сайта: <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" name="sitename" class="form-control" required placeholder="например: Моя домашняя страница" value="{{ old($settings->sitename) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">URL сайта (без http или https): <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" name="siteurl" class="form-control" required placeholder="например: mail.ru" value="{{ old($settings->siteurl) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Описание (Description) сайта: <span class="text-danger">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" name="sitedescription" class="form-control" placeholder="Краткое описание, не более 200 символов" value="{{ old($settings->sitedescription) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Ключевые слова (Keywords) для сайта: <span class="text-danger">*</span></label>
+                <div class="col-lg-9">
+                  <textarea class="form-control" id="val-suggestions" name="sitekeywords" rows="5" placeholder="Введите через запятую основные ключевые слова для вашего сайта">{{ old($settings->sitekeywords) }}</textarea>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Логотип фирмы: </label>
+                <div class="col-lg-9">
+                  <input type="file" class="form-control" name="sitelogo" id="inputFile">
+                </div>
+              </div>
+              <hr>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Количество новостей на страницу: </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="amountnews" value="{{ old($settings->amountnews) }}">
+                </div>
+              </div>
+              <hr>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Выключить сайт: </label>
+                <div class="col-lg-9">
+                  <div class="xp-switchery">
+                    <input type="checkbox" class="js-switch-primary" name="offsite"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Причина отключения сайта: </label>
+                <div class="col-lg-9">
+                  <textarea class="form-control" id="val-suggestions" name="textoffsite" rows="5" placeholder="Сообщение для отображения в режиме отключенного сайта">{{ old($settings->amountnews) }}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="bank-justified" role="tabpanel" aria-labelledby="bank-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Юридическое название организации: </label>
+                <div class="col-sm-9">
+                  <input type="text" name="nameorg" class="form-control" placeholder="например: АО Рога и копыта»" value="{{ old($settings->nameorg) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Юридическое адрес организации: </label>
+                <div class="col-sm-9">
+                  <input type="text" name="adressorg" class="form-control" placeholder="например: г. Астана, Мира 10» value="{{ old($settings->adressorg) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">БИН организации: </label>
+                <div class="col-sm-9">
+                  <input type="text" name="binorg" class="form-control" placeholder="максимум 12 символов" value="{{ old($settings->binorg) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Название банка: </label>
+                <div class="col-sm-9">
+                  <input type="text" name="bankname" class="form-control" placeholder="например: АО «Народный Банк Казахстана»" value="{{ old($settings->bankname) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">БИК банка: </label>
+                <div class="col-sm-9">
+                  <input type="text" name="bankbik" class="form-control" placeholder="максимум 8 символов" value="{{ old($settings->bankbik) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Расчетный счет: </label>
+                <div class="col-lg-9">
+                  <input type="text" name="bankrs" class="form-control" placeholder="максимум 20 символов" value="{{ old($settings->bankrs) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">КБЕ: </label>
+                <div class="col-lg-9">
+                  <input type="text" name="bankkbe" class="form-control" placeholder="максимум 2 символа" value="{{ old($settings->bankkbe) }}">
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="finance-justified" role="tabpanel" aria-labelledby="finance-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Вкл/Выкл отображения истории платежей: </label>
+                <div class="col-lg-9">
+                  <div class="xp-switchery">
+                    <input type="checkbox" name="offpays" class="js-switch-primary" checked="" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 control-label">Вкл/Выкл отображения очереди: </label>
+                <div class="col-sm-9">
+                  <div class="xp-switchery">
+                    <input type="checkbox" name="offrow" class="js-switch-primary" checked="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="flow-justified" role="tabpanel" aria-labelledby="flow-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Получение очереди в процентах: </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="rowdec" value="{{ old($settings->rowdec) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Кол-во записей на страницу (очередь): </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="rowam" value="{{ old($settings->rowam) }}">
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="pay-justified" role="tabpanel" aria-labelledby="pay-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Количество символов в пароле пайщика (админ): </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="userampass" value="{{ old($settings->userampass) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Кол-во записей на страницу (главная страница): </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="userampay" value="{{ old($settings->userampay) }}">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">Кол-во записей в блоке истории платежей пайщика: </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="userampays" value="{{ old($settings->userampays) }}">
+                </div>
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="notif-justified" role="tabpanel" aria-labelledby="notif-tab-justified">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label" for="val-suggestions">За сколько дней до конца месяца начинать уведомлять пайщика об отсутствии платежей: </label>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control" id="xp-touchspin-value-attribute" name="daysoffpays" value="{{ old($settings->daysoffpays) }}">
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- tab-content -->
+          <input type="submit" class="btn btn-primary" value="Сохранить">
+        </div>
+        {!! Form::close() !!}
+      </div>
+    </div>
+    <!-- End XP Col -->
+
+  </div>
+@endsection
