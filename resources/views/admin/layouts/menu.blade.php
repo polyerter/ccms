@@ -63,7 +63,7 @@
     </li>
     @if (Auth::user()->hasPermission('user-list')){{-- todo проверка прав на просмотр и добавление пользователя --}}
       <li>
-        <a href="href="javaScript:void();">
+        <a href="#">
           <i class="dripicons-user"></i><span>Пользователи</span><i class="icon-arrow-right pull-right"></i>
         <ul class="xp-vertical-submenu">
           @if (Auth::user()->hasPermission('users-add')) {{-- todo проверка прав на добавление пользователя --}}
@@ -81,7 +81,7 @@
       </li>
     @endif
     <li>
-      <a href="javaScript:void();">
+      <a href="#">
         <i class="mdi mdi-settings-outline"></i><span>Настройки</span><i class="icon-arrow-right pull-right"></i>
         <ul class="xp-vertical-submenu">
           <li>

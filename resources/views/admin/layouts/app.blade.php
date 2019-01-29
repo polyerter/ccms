@@ -50,10 +50,22 @@
 </div>
 
 <script src="{{ asset('js/admin/jquery.min.js') }}"></script>
+
+<script>
+    $.ajaxSetup({
+        beforeSend: function(xhr, type) {
+            if (!type.crossDomain) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            }
+        }
+    });
+</script>
+
 <script src="{{ asset('js/admin/popper.min.js') }}"></script>
 <script src="{{ asset('js/admin/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/admin/modernizr.min.js') }}"></script>
 <script src="{{ asset('js/admin/admin-main.js') }}"></script>
+
 
 
 @stack('scripts')

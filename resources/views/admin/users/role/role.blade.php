@@ -12,16 +12,9 @@
   {{--  <script src="{{ asset('js/admin/users/js/jstree.min.js') }}"></script>--}}
   {{--  <script src="{{ asset('js/admin/init/jstree-init.js') }}"></script>--}}
   {{--генератор пароля--}}
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
   <script>
-      $.ajaxSetup({
-          beforeSend: function(xhr, type) {
-              if (!type.crossDomain) {
-                  xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-              }
-          },
-      });
       function updatePermissions(id, li) {
           var items = [];
           /* Формирует массив прав к отправке */
@@ -42,7 +35,7 @@
               });
           }
       }
-      $(document).ready(function () {
+      $(document).ready(function ($) {
           /**
            //  todo Получение прав пользователя, проходит по всем элементам с классом permissions
            **/
@@ -51,7 +44,7 @@
               var id = $(el).data('id'); // получение id пользователя
               $.post('{{ url('admin/permissions/get') }}', {user: id}, function (data) { // запрос на получение прав
                   /* Построение дерева прав */
-                  //  console.log({data});  todo вывод в консоль запроса массива
+                    console.log(data);  // todo вывод в консоль запроса массива
                   $('.permissions').jstree({
                       'plugins': [
                           "wholerow",
@@ -85,7 +78,6 @@
       })
   </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 @endpush
 
 @section('content')

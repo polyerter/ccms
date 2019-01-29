@@ -13,6 +13,6 @@ class Permission extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'permission_user', 'permission_id', 'user_id');
+        return $this->belongsToMany(\App\User::class, 'permission_user', 'permission_id', 'user_id');
     }
 }
