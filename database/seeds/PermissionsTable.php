@@ -87,25 +87,31 @@ class PermissionsTable extends Seeder
                 'description' => ''
             ],
             [
-                'name' => 'users-add',
+                'name' => 'user-add',
                 'parent' => '2',
                 'display_name' => 'Добавление пользователя',
                 'description' => ''
             ],
             [
-                'name' => 'users-edit',
+                'name' => 'user-edit',
                 'parent' => '2',
                 'display_name' => 'Редактировать пользователя',
                 'description' => ''
             ],
             [
-                'name' => 'users-delete',
+                'name' => 'user-delete',
                 'parent' => '2',
                 'display_name' => 'Удалить пользователя',
                 'description' => ''
             ],
             [
-                'name' => 'users-addpays',
+                'name' => 'user-show',
+                'parent' => '2',
+                'display_name' => 'View user',
+                'description' => ''
+            ],
+            [
+                'name' => 'user-addpays',
                 'parent' => '2',
                 'display_name' => 'Добавление платежей пользователю',
                 'description' => ''

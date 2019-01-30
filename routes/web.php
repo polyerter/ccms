@@ -20,10 +20,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     //   block users
     //    Route::resource('/users', 'UserController', ['as' => 'admin']);
     Route::get('users', ['as' => 'admin.users.index', 'uses' => 'UserController@index', 'middleware' => ['permission:user-list']]);
-    Route::get('users/create', ['as' => 'admin.users.create', 'uses' => 'UserController@create', 'middleware' => ['permission:users-add']]);
-    Route::post('users', ['as' => 'admin.users.store', 'uses' => 'UserController@store', 'middleware' => ['permission:users-add']]);
-    Route::put('users/{user}', ['as' => 'admin.users.update', 'uses' => 'UserController@update', 'middleware' => ['permission:users-add']]);
-    Route::get('users/{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'UserController@edit', 'middleware' => ['permission:users-edit']]);
+    Route::get('users/create', ['as' => 'admin.users.create', 'uses' => 'UserController@create', 'middleware' => ['permission:user-add']]);
+    Route::post('users', ['as' => 'admin.users.store', 'uses' => 'UserController@store', 'middleware' => ['permission:user-add']]);
+    Route::put('users/{user}', ['as' => 'admin.users.update', 'uses' => 'UserController@update', 'middleware' => ['permission:user-add']]);
+    Route::get('users/{id}/edit', ['as' => 'admin.users.edit', 'uses' => 'UserController@edit', 'middleware' => ['permission:user-edit']]);
     Route::get('users/{id}', ['as' => 'admin.users.show', 'uses' => 'UserController@show', 'middleware' => ['permission:user-show']]);
     Route::get('users/destroy', ['as' => 'admin.users.destroy', 'uses' => 'UserController@destroy', 'middleware' => ['permission:user-delete']]);
 
