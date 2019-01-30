@@ -44,7 +44,7 @@
               var id = $(el).data('id'); // получение id пользователя
               $.post('{{ url('admin/permissions/get') }}', {user: id}, function (data) { // запрос на получение прав
                   /* Построение дерева прав */
-                    console.log(data);  // todo вывод в консоль запроса массива
+//                    console.log(data);  // todo вывод в консоль запроса массива
                   $('.permissions').jstree({
                       'plugins': [
                           "wholerow",
